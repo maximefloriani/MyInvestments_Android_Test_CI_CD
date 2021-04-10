@@ -6,11 +6,6 @@ buildscript {
         jcenter()
     }
     
-    android {
-      lintOptions {
-          abortOnError false
-      }
-  }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -29,4 +24,29 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+android {
+
+    //.....
+
+    lintOptions {
+        // turn off checking the given issue id's
+        disable 'TypographyFractions','TypographyQuotes'
+
+        // turn on the given issue id's
+        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+
+        // check *only* the given issue id's
+        check 'NewApi', 'InlinedApi'
+
+       // set to true to turn off analysis progress reporting by lint
+       quiet true
+ 
+       // if true, stop the gradle build if errors are found
+       abortOnError false
+   
+       // if true, only report errors
+       ignoreWarnings true
+    }
 }
