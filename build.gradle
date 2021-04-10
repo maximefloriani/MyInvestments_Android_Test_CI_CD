@@ -20,31 +20,6 @@ allprojects {
         google()
         jcenter()
     }
-    
-    android {
-
-    //.....
-
-    lintOptions {
-        // turn off checking the given issue id's
-        disable 'TypographyFractions','TypographyQuotes'
-
-        // turn on the given issue id's
-        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
-
-        // check *only* the given issue id's
-        check 'NewApi', 'InlinedApi'
-
-       // set to true to turn off analysis progress reporting by lint
-       quiet true
- 
-       // if true, stop the gradle build if errors are found
-       abortOnError false
-   
-       // if true, only report errors
-       ignoreWarnings true
-    }
-}
 }
 
 task clean(type: Delete) {
