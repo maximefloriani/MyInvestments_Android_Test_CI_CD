@@ -2,23 +2,21 @@ package com.lalorosas.myinvestments
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import java.text.NumberFormat
 
 class Investment {
-    var id : Int = 0
-    var investmentName : String ? = null
-    var investmentAmount : Float = 0f
+    var id: Int = 0
+    var investmentName: String? = null
+    var investmentAmount: Float = 0f
 
-    constructor(id : Int, investmentName : String, investmentAmount : Float) {
+    constructor(id: Int, investmentName: String, investmentAmount: Float) {
         this.id = id
         this.investmentAmount = investmentAmount
         this.investmentName = investmentName
     }
 
-    constructor(investmentName : String, investmentAmount : Float) {
+    constructor(investmentName: String, investmentAmount: Float) {
         this.investmentAmount = investmentAmount
         this.investmentName = investmentName
     }
@@ -28,19 +26,21 @@ class Investment {
     }
 }
 
-class InvestmentDBOpenHelper(context: Context,
-                             factory: SQLiteDatabase.CursorFactory?) :
-    SQLiteOpenHelper(context, DATABASE_NAME,
-        factory, DATABASE_VERSION) {
+class InvestmentDBOpenHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
+        SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
-        val table = ("CREATE TABLE " +
-                TABLE_NAME + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY," +
-                COLUMN_NAME +
-                " TEXT," +
-                COLUMN_AMOUNT +
-                " REAL" + ")")
+        val table =
+                ("CREATE TABLE " +
+                        TABLE_NAME +
+                        "(" +
+                        COLUMN_ID +
+                        " INTEGER PRIMARY KEY," +
+                        COLUMN_NAME +
+                        " TEXT," +
+                        COLUMN_AMOUNT +
+                        " REAL" +
+                        ")")
         db.execSQL(table)
     }
 
@@ -61,11 +61,11 @@ class InvestmentDBOpenHelper(context: Context,
     fun read(): ArrayList<Investment>? {
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
-        cursor!! .moveToFirst()
+        cursor!!.moveToFirst()
 
         val investments = ArrayList<Investment>()
 
-        while(cursor.moveToNext()) {
+        while (cursor.moveToNext()) {
             val name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME))
             val amount = cursor.getFloat(cursor.getColumnIndex(COLUMN_AMOUNT))
             val investment = Investment(name, amount)
