@@ -20,13 +20,8 @@ allprojects {
         google()
         jcenter()
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
-android {
+    
+    android {
 
     //.....
 
@@ -50,3 +45,10 @@ android {
        ignoreWarnings true
     }
 }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+
